@@ -8,9 +8,13 @@ import { Header } from '../components/Header';
 import { TextInput } from '../components/TextInput';
 import  Button  from "../components/Button";
 import { theme } from '../core/theme';
-import { TextInput as Input, IconButton } from 'react-native-paper';
+import { TextInput as Input } from 'react-native-paper';
 
 export const RegisterScreen = ({ navigation }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const [passwordVisible, setPasswordVisible] = useState(false);
 
 
