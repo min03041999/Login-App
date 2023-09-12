@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import TokenService from "../../Api/tokenService";
 import UserApi from "../../Api/UserApi";
 
-const initialState = { isPrecessingRequest: false, token: TokenService.getToken() };
+const initialState = { isPrecessingRequest: null, token: TokenService.getToken() };
 
 const UserSlice = createSlice({
     name: "login",
@@ -34,15 +34,18 @@ const UserSlice = createSlice({
 export const loginUser = (data) => async (dispatch) => {
     try {
         const res = await UserApi.loginUser(data);
+
         const token = TokenService.setToken({ access_token: res.accessToken, refresh_token: res.refreshToken })
 
         if (token !== null) {
-            dispatch(success({ message: res.message, token: token }));
+            dispatch(success({ message: res.message, token: { access_token: res.accessToken, refresh_token: res.refreshToken } }));
         } else {
             dispatch(error({ message: res.message, token: "" }));
+
         }
     } catch (err) {
         dispatch(error({ message: "Login is failed!", token: "" }));
+
     }
 }
 
@@ -110,5 +113,9 @@ export const logoutUser = () => async (dispatch) => {
         dispatch(error({ message: "Data error" }));
     }
 }
+
+export const { start, success, error } = UserSlice.actions;
+
+export const UserState = (state) => state.user;
 
 export default UserSlice.reducer;

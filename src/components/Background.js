@@ -1,17 +1,22 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, KeyboardAvoidingView } from 'react-native';
-import {theme} from "../core/theme";
-import BackGround from "../../assets/bg-image.jpg";
+import { theme } from "../core/theme";
+import BackGround from "../../assets/bg-image.avif";
 
 
-export const Background = ({children}) => {
-  return (
-    <ImageBackground source={BackGround} style={styles.background}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-            {children}
-        </KeyboardAvoidingView>
-    </ImageBackground>
-  )
+export const Background = ({ children }) => {
+    return (
+        <ImageBackground source={BackGround} style={styles.background}>
+            <KeyboardAvoidingView style={styles.container} behavior="padding">
+                {children}
+            </KeyboardAvoidingView>
+        </ImageBackground>
+        // <ImageBackground source={BackGround} style={styles.background}>
+        //     <KeyboardAvoidingView style={styles.container} behavior="padding">
+        //         {children}
+        //     </KeyboardAvoidingView>
+        // </ImageBackground>
+    )
 }
 
 const styles = StyleSheet.create({
